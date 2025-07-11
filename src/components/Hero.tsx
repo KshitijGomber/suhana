@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Download } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -42,6 +42,19 @@ const Hero = () => {
           >
             Learn More
           </a>
+          <button
+            onClick={() => {
+              // You can replace this with an actual resume file path
+              const link = document.createElement('a');
+              link.href = '/resume.pdf'; // Add your resume PDF to the public folder
+              link.download = 'Suhana_Gomber_Resume.pdf';
+              link.click();
+            }}
+            className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover-scale shadow-lg flex items-center justify-center gap-2"
+          >
+            <Download size={20} />
+            Download Resume
+          </button>
         </div>
       </div>
       

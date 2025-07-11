@@ -24,11 +24,12 @@ function App() {
       
       {/* Floating GIF - Always visible on main site */}
       {!isLoading && (
-        <div className="fixed bottom-8 right-8 z-40 w-24 h-24 md:w-32 md:h-32">
+        <div className="fixed bottom-2 right-2 z-40 w-24 h-24 md:w-32 md:h-32">
           <img 
-            src="/src/assets/cat-gif.gif" 
+            src="/cat-gif.gif" 
             alt="Cute waving cat" 
-            className="w-full h-full object-contain rounded-lg shadow-lg hover:scale-110 transition-transform duration-300"
+            className="w-full h-full object-contain hover:scale-110 transition-transform duration-300 bg-transparent"
+            style={{ backgroundColor: 'transparent' }}
           />
         </div>
       )}
@@ -41,8 +42,8 @@ function App() {
         <Education />
         <Coursework />
         <Extracurricular />
-        <Gallery />
         <Contact />
+        <Gallery />
       </main>
     </div>
   );
