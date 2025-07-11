@@ -1,7 +1,12 @@
 import React from 'react';
 import { BookOpen, AlignCenterVertical as Certificate, Code, BarChart3 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 const Coursework = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.2 });
+
   const courseworkCategories = [
     {
       category: 'Digital Business & Strategy',
@@ -46,19 +51,37 @@ const Coursework = () => {
   ];
 
   return (
-    <section id="coursework" className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+    <motion.section 
+      id="coursework" 
+      className="py-20 bg-gradient-to-br from-purple-50 to-pink-50"
+      ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">Relevant Coursework</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
             A comprehensive overview of my academic pursuits and professional certifications
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {courseworkCategories.map((category, index) => (
-            <div key={index} className="bg-white/70 rounded-2xl p-6 hover:bg-white transition-all duration-300 hover-scale shadow-sm">
+            <motion.div 
+              key={index} 
+              className="bg-white/70 rounded-2xl p-6 hover:bg-white transition-all duration-300 hover-scale shadow-sm"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
+              transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+            >
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white">
                   {category.icon}
@@ -74,18 +97,23 @@ const Coursework = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
         
-        <div className="mt-12 text-center">
+        <motion.div 
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
           <div className="inline-flex items-center space-x-2 bg-purple-100 rounded-full px-6 py-3">
             <Certificate className="w-5 h-5 text-purple-600" />
             <span className="text-purple-700 font-semibold">Continuously expanding knowledge base</span>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

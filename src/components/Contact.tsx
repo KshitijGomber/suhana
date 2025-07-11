@@ -1,8 +1,13 @@
 import React from 'react';
 import emailjs from '@emailjs/browser';
 import { Mail, Phone, Linkedin, MapPin, Download, Send } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 const Contact = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.2 });
+
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitStatus, setSubmitStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
 
@@ -71,34 +76,51 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white/50">
+    <motion.section 
+      id="contact" 
+      className="py-20 bg-white/50"
+      ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">Get In Touch</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
             Ready to connect and explore opportunities together. Let's start a conversation!
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Info */}
-          <div className="space-y-6">
+          <motion.div 
+            className="space-y-6"
+            initial={{ opacity: 0, x: -100 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             <h3 className="text-2xl font-bold mb-8 text-gray-800">Let's Connect</h3>
             
             {contactInfo.map((item, index) => (
-              <div key={index} className="flex items-center space-x-4 p-4 rounded-lg bg-white/70 hover:bg-white transition-all duration-300 shadow-sm">
+              <div key={index} className={`flex items-center space-x-4 p-4 rounded-lg bg-white/70 hover:bg-white transition-all duration-300 shadow-sm ${item.link ? 'cursor-pointer hover:shadow-md' : ''}`}>
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white">
                   {item.icon}
                 </div>
-                <div>
+                <div className="flex-1">
                   <div className="text-gray-500 text-sm">{item.label}</div>
                   {item.link ? (
                     <a 
                       href={item.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-gray-800 hover:text-purple-600 transition-colors font-semibold"
+                      target={item.link.startsWith('http') ? "_blank" : "_self"}
+                      rel={item.link.startsWith('http') ? "noopener noreferrer" : undefined}
+                      className="text-gray-800 hover:text-purple-600 transition-colors font-semibold block"
                     >
                       {item.value}
                     </a>
@@ -108,10 +130,15 @@ const Contact = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
           
           {/* Contact Form */}
-          <div className="contact-form">
+          <motion.div 
+            className="contact-form"
+            initial={{ opacity: 0, y: 100 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
             <h3 className="text-2xl font-bold mb-6 text-gray-800">Send a Message</h3>
             <form className="space-y-6" onSubmit={handleSubmit} noValidate>
               <div className="form-group">
@@ -152,7 +179,7 @@ const Contact = () => {
               </div>
               <button 
                 type="submit" 
-                className={`submit-btn ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+                className={`w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-lg font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -180,10 +207,15 @@ const Contact = () => {
                 </div>
               )}
             </form>
-          </div>
+          </motion.div>
           
           {/* Professional Summary */}
-          <div className="bg-white/70 rounded-2xl p-8 shadow-sm">
+          <motion.div 
+            className="bg-white/70 rounded-2xl p-8 shadow-sm"
+            initial={{ opacity: 0, x: 100 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
             <h3 className="text-2xl font-bold mb-6 text-gray-800">Professional Summary</h3>
             <p className="text-gray-600 mb-6 leading-relaxed">
               MBA candidate with 3+ years of experience in talent acquisition and business development. 
@@ -216,10 +248,10 @@ const Contact = () => {
                 <span>Download Resume</span>
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

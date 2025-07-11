@@ -4,13 +4,39 @@ import { Menu, X } from 'lucide-react';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Determine active section
+      const sections = ['about', 'experience', 'education', 'coursework', 'extracurricular', 'contact', 'gallery'];
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.offsetHeight : 80;
+      const scrollPosition = window.scrollY + headerHeight + 100; // Add some buffer
+      
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const sectionTop = element.offsetTop;
+          const sectionBottom = sectionTop + element.offsetHeight;
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+      
+      // If we're at the very top, no section is active
+      if (window.scrollY < 100) {
+        setActiveSection('');
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Call once to set initial state
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -19,9 +45,43 @@ const Header = () => {
     { href: '#experience', label: 'Experience' },
     { href: '#education', label: 'Education' },
     { href: '#coursework', label: 'Coursework' },
-    { href: '#gallery', label: 'Gallery' },
-    { href: '#contact', label: 'Contact' }
+    { href: '#extracurricular', label: 'Community Impact' },
+    { href: '#contact', label: 'Contact' },
+    { href: '#gallery', label: 'Gallery' }
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.slice(1); // Remove the '#' from href
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      // Close mobile menu first if open
+      setIsMenuOpen(false);
+      
+      // Use requestAnimationFrame to ensure the scroll happens after any layout changes
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          // Get the actual header height dynamically
+          const header = document.querySelector('header');
+          const headerHeight = header ? header.offsetHeight : 80;
+          
+          // Account for section padding - sections have py-20 (80px top padding)
+          // So we reduce the additional offset since sections already have padding
+          const additionalOffset = 10;
+          const targetPosition = targetElement.offsetTop - headerHeight - additionalOffset;
+          
+          window.scrollTo({
+            top: Math.max(0, targetPosition), // Ensure we don't scroll to negative values
+            behavior: 'smooth'
+          });
+        }, 100); // Small delay to ensure menu closes first
+      });
+    } else {
+      // Close mobile menu if element not found
+      setIsMenuOpen(false);
+    }
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
@@ -34,15 +94,25 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">
-          {menuItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-gray-600 hover:text-purple-600 transition-colors duration-200 font-medium"
-            >
-              {item.label}
-            </a>
-          ))}
+          {menuItems.map((item) => {
+            const sectionId = item.href.slice(1); // Remove '#' from href
+            const isActive = activeSection === sectionId;
+            
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`transition-colors duration-200 font-medium cursor-pointer ${
+                  isActive 
+                    ? 'text-purple-600 border-b-2 border-purple-600' 
+                    : 'text-gray-600 hover:text-purple-600'
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -58,16 +128,25 @@ const Header = () => {
       {isMenuOpen && (
         <nav className="md:hidden bg-white/90 backdrop-blur-md border-t border-gray-200">
           <div className="container mx-auto px-6 py-4 space-y-4">
-            {menuItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="block text-gray-600 hover:text-purple-600 transition-colors duration-200 font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
+            {menuItems.map((item) => {
+              const sectionId = item.href.slice(1); // Remove '#' from href
+              const isActive = activeSection === sectionId;
+              
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={`block transition-colors duration-200 font-medium cursor-pointer ${
+                    isActive 
+                      ? 'text-purple-600 font-semibold' 
+                      : 'text-gray-600 hover:text-purple-600'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </div>
         </nav>
       )}

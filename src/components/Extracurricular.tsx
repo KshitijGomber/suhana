@@ -1,7 +1,12 @@
 import React from 'react';
 import { Users, Heart, Award, Calendar } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 const Extracurricular = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.2 });
+
   const activities = [
     {
       title: 'President of Smith Cares Club',
@@ -33,19 +38,37 @@ const Extracurricular = () => {
   ];
 
   return (
-    <section id="extracurricular" className="py-20 bg-white/50">
+    <motion.section 
+      id="extracurricular" 
+      className="py-20 bg-white/50"
+      ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">Community Impact</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
             Committed to making a positive difference through leadership and volunteer work
           </p>
-        </div>
+        </motion.div>
         
         <div className="space-y-8">
           {activities.map((activity, index) => (
-            <div key={index} className="bg-white/70 rounded-2xl p-8 hover:bg-white transition-all duration-300 hover-scale shadow-sm">
+            <motion.div 
+              key={index} 
+              className="bg-white/70 rounded-2xl p-8 hover:bg-white transition-all duration-300 hover-scale shadow-sm"
+              initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: index % 2 === 0 ? -100 : 100, scale: 0.9 }}
+              transition={{ duration: 0.8, delay: 0.4 + index * 0.2 }}
+            >
               <div className="grid md:grid-cols-12 gap-6">
                 <div className="md:col-span-3 text-center md:text-left">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white mb-4">
@@ -69,11 +92,11 @@ const Extracurricular = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

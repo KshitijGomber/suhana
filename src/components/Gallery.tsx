@@ -1,7 +1,12 @@
 import React from 'react';
 import { Camera, Users, Heart, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 const Gallery = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.2 });
+
   const galleryItems = [
     {
       image: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=600',
@@ -42,19 +47,37 @@ const Gallery = () => {
   ];
 
   return (
-    <section id="gallery" className="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
+    <motion.section 
+      id="gallery" 
+      className="py-20 bg-gradient-to-br from-pink-50 to-purple-50"
+      ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">Gallery</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
             Moments from my professional journey and volunteer experiences
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {galleryItems.map((item, index) => (
-            <div key={index} className="group relative overflow-hidden rounded-2xl hover-scale">
+            <motion.div 
+              key={index} 
+              className="group relative overflow-hidden rounded-2xl hover-scale"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
+              transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+            >
               <div className="aspect-square overflow-hidden">
                 <img
                   src={item.image}
@@ -72,18 +95,23 @@ const Gallery = () => {
                   <h3 className="text-white text-lg font-bold">{item.title}</h3>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         
-        <div className="mt-12 text-center">
+        <motion.div 
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 1 }}
+        >
           <div className="inline-flex items-center space-x-2 bg-purple-100 rounded-full px-6 py-3">
             <Camera className="w-5 h-5 text-purple-600" />
             <span className="text-purple-700 font-semibold">Capturing meaningful moments</span>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
