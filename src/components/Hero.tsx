@@ -136,7 +136,7 @@ const Hero = () => {
               Passionate about connecting talent with opportunities and driving business growth through strategic thinking and innovative solutions.
             </motion.p>
             
-            <motion.div 
+            {/* <motion.div 
               className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start items-stretch"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -191,7 +191,59 @@ const Hero = () => {
                 <span className="relative z-10">Download Resume</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.button>
+            </motion.div> */}
+            <motion.div 
+              className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start items-center gap-4 md:gap-6 w-full"
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+            >
+              {/* Get In Touch */}
+              <motion.a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('contact');
+                }}
+                className="group relative bg-gradient-to-r from-pink-400 to-fuchsia-500 text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 active:scale-95 min-w-[160px] text-center"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <span className="relative z-10">💌 Get In Touch</span>
+                <div className="absolute inset-0 rounded-full bg-pink-500/30 blur-lg opacity-0 group-hover:opacity-100 transition duration-300"></div>
+              </motion.a>
+
+              {/* Learn More */}
+              <motion.a
+                href="#about"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('about');
+                }}
+                className="group relative bg-white border-2 border-pink-500 text-pink-600 hover:text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-full transition-all duration-300 hover:bg-gradient-to-r from-pink-400 to-fuchsia-500 shadow-md hover:shadow-lg min-w-[160px] text-center"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <span className="relative z-10">🎀 Learn More</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+              </motion.a>
+
+              {/* Download Resume */}
+              <motion.a
+              href="/resume.pdf"
+              download="Suhana_Gomber_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-gradient-to-r from-rose-400 to-pink-500 text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-full shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 min-w-[180px] text-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Download size={18} className="shrink-0" />
+              <span className="relative z-10">💾 Download Resume</span>
+              <div className="absolute inset-0 bg-pink-600/30 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.a>
             </motion.div>
+
           </motion.div>
         </div>
       </div>
