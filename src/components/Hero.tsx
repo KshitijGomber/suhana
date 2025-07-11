@@ -110,7 +110,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.5 }}
           >
             <motion.h1 
-              className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6"
+              className="text-2xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -119,7 +119,7 @@ const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-3 md:mb-4"
+              className="text-sm md:text-xl lg:text-2xl text-gray-600 mb-3 md:mb-4"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 1 }}
@@ -128,7 +128,7 @@ const Hero = () => {
             </motion.p>
             
             <motion.p 
-              className="text-lg text-gray-500 mb-12 max-w-2xl lg:max-w-none"
+              className="text-sm md:text-lg text-gray-500 mb-8 md:mb-12 max-w-2xl lg:max-w-none"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 1.2 }}

@@ -30,7 +30,7 @@ const About = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">About Me</h2>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 gradient-text">About Me</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
         </motion.div>
         
@@ -45,11 +45,11 @@ const About = () => {
               <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white">
                 <User className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800">Get to Know Me</h3>
+              <h3 className="text-lg md:text-2xl font-bold text-gray-800">Get to Know Me</h3>
             </div>
             
             <motion.p 
-              className="text-lg text-gray-600 leading-relaxed"
+              className="text-sm md:text-lg text-gray-600 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -60,7 +60,7 @@ const About = () => {
             </motion.p>
             
             <motion.p 
-              className="text-lg text-gray-600 leading-relaxed"
+              className="text-sm md:text-lg text-gray-600 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -81,7 +81,7 @@ const About = () => {
               <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white">
                 <Heart className="w-6 h-6" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800">Personal Interests</h3>
+              <h3 className="text-lg md:text-2xl font-bold text-gray-800">Personal Interests</h3>
             </div>
             
             <div className="grid grid-cols-1 gap-4">
@@ -96,7 +96,7 @@ const About = () => {
                   <div className="text-purple-500">
                     {hobby.icon}
                   </div>
-                  <span className="text-gray-700 font-medium">{hobby.text}</span>
+                  <span className="text-gray-700 font-medium text-sm md:text-base">{hobby.text}</span>
                 </motion.div>
               ))}
             </div>

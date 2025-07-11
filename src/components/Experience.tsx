@@ -53,14 +53,14 @@ const Experience = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 gradient-text">Professional Experience</h2>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 gradient-text">Professional Experience</h2>
           <div className="w-20 md:w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
         </motion.div>
         
         <div className="relative">
           {/* Animated Timeline Line - Responsive positioning */}
           <motion.div
-            className="absolute left-8 md:left-1/2 lg:left-[25%] transform md:-translate-x-1/2 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 z-10"
+            className="absolute left-6 md:left-1/2 lg:left-[25%] transform md:-translate-x-1/2 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 z-10"
             initial={{ height: 0 }}
             whileInView={{ height: "calc(100% - 4rem)" }}
             transition={{ duration: 2, ease: "easeInOut" }}
@@ -79,8 +79,8 @@ const Experience = () => {
                 viewport={{ once: true, margin: "-50px" }}
               >
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start md:items-center">
-                  {/* Timeline Icon - Left aligned on mobile, centered on larger screens */}
-                  <div className="md:col-span-3 flex justify-start md:justify-center lg:justify-end relative z-20 mb-4 md:mb-0">
+                  {/* Timeline Icon - Centered on mobile */}
+                  <div className="md:col-span-3 flex justify-center md:justify-center lg:justify-end relative z-20 mb-4 md:mb-0">
                     <motion.div 
                       className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white shadow-xl border-3 md:border-4 border-white"
                       initial={{ scale: 0, rotate: -180 }}
@@ -96,19 +96,19 @@ const Experience = () => {
                   </div>
                   
                   {/* Content */}
-                  <div className="md:col-span-9 ml-16 md:ml-0">
+                  <div className="md:col-span-9">
                     <motion.div 
                       className="bg-white/90 rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-purple-100"
                       whileHover={{ y: -2, scale: 1.01 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="flex flex-col gap-3 md:gap-4 mb-4 md:mb-6">
+                      <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 mb-3 md:mb-4 lg:mb-6">
                         <div>
-                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800 mb-1 leading-tight">{exp.title}</h3>
-                          <div className="text-purple-600 font-semibold text-base md:text-lg">{exp.company}</div>
+                          <h3 className="text-sm md:text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-1 leading-tight">{exp.title}</h3>
+                          <div className="text-purple-600 font-semibold text-xs md:text-base lg:text-lg">{exp.company}</div>
                         </div>
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1">
-                          <div className="text-purple-700 font-bold text-sm md:text-base lg:text-lg">{exp.period}</div>
+                          <div className="text-purple-700 font-bold text-xs md:text-sm lg:text-base xl:text-lg">{exp.period}</div>
                           <div className="text-gray-500 text-xs md:text-sm">{exp.location}</div>
                         </div>
                       </div>
@@ -129,8 +129,8 @@ const Experience = () => {
                             transition={{ duration: 0.4, delay: index * 0.2 + 0.6 + hIndex * 0.1 }}
                             viewport={{ once: true }}
                           >
-                            <Target className="w-4 h-4 md:w-5 md:h-5 text-purple-500 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700 leading-relaxed text-sm md:text-base">{highlight}</span>
+                            <Target className="w-3 h-3 md:w-5 md:h-5 text-purple-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700 leading-relaxed text-xs md:text-base">{highlight}</span>
                           </motion.li>
                         ))}
                       </motion.ul>
