@@ -78,7 +78,7 @@ const Experience = () => {
                       viewport={{ once: true }}
                       whileHover={{ scale: 1.05 }}
                     >
-                      <div className="w-4 h-4 md:w-6 md:h-6">
+                      <div className="flex items-center justify-center w-6 h-6 md:w-8 md:h-8">
                         {exp.icon}
                       </div>
                     </motion.div>
