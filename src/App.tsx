@@ -11,6 +11,7 @@ import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import LoadingScreen from './components/LoadingScreen';
 import './App.css';
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,6 +60,7 @@ function App() {
         <Contact />
         <Gallery />
       </main>
+      <Analytics />
     </div>
   );
 }
