@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 
 const Hero = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const isInView = useInView(ref, { once: false, amount: 0.2 });
 
   const handleNavClick = (targetId: string) => {
     const targetElement = document.getElementById(targetId);

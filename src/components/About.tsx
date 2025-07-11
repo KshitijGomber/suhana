@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 
 const About = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const isInView = useInView(ref, { once: false, amount: 0.2 });
 
   const hobbies = [
     { icon: <Heart className="w-6 h-6" />, text: 'Mindfulness meditation' },
@@ -17,35 +17,35 @@ const About = () => {
   return (
     <motion.section 
       id="about" 
-      className="py-20 bg-white/50"
+      className="py-16 md:py-20 bg-white/50"
       ref={ref}
       initial={{ opacity: 0, y: 100 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 md:px-6">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 gradient-text">About Me</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 gradient-text">About Me</h2>
+          <div className="w-20 md:w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid gap-6 md:grid-cols-2 md:gap-12 items-center">
           <motion.div 
-            className="space-y-6"
+            className="space-y-4 md:space-y-6"
             initial={{ opacity: 0, x: -100 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="flex items-center space-x-4 mb-6">
+            <div className="flex items-center space-x-4 mb-4 md:mb-6">
               <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white">
                 <User className="w-6 h-6" />
               </div>
-              <h3 className="text-lg md:text-2xl font-bold text-gray-800">Get to Know Me</h3>
+              <h3 className="text-base md:text-2xl font-bold text-gray-800">Get to Know Me</h3>
             </div>
             
             <motion.p 
@@ -72,23 +72,23 @@ const About = () => {
           </motion.div>
           
           <motion.div 
-            className="space-y-6"
+            className="space-y-4 md:space-y-6"
             initial={{ opacity: 0, x: 100 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="flex items-center space-x-4 mb-6">
+            <div className="flex items-center space-x-4 mb-4 md:mb-6">
               <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white">
                 <Heart className="w-6 h-6" />
               </div>
-              <h3 className="text-lg md:text-2xl font-bold text-gray-800">Personal Interests</h3>
+              <h3 className="text-base md:text-2xl font-bold text-gray-800">Personal Interests</h3>
             </div>
             
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-3 md:gap-4">
               {hobbies.map((hobby, index) => (
                 <motion.div 
                   key={index}
-                  className="flex items-center space-x-4 p-4 bg-white/70 rounded-lg hover:bg-white transition-colors duration-300 shadow-sm"
+                  className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 bg-white/70 rounded-lg hover:bg-white transition-colors duration-300 shadow-sm"
                   initial={{ opacity: 0, x: 50 }}
                   animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
@@ -96,13 +96,13 @@ const About = () => {
                   <div className="text-purple-500">
                     {hobby.icon}
                   </div>
-                  <span className="text-gray-700 font-medium text-sm md:text-base">{hobby.text}</span>
+                  <span className="text-gray-700 font-medium text-xs md:text-base">{hobby.text}</span>
                 </motion.div>
               ))}
             </div>
             
             <motion.p 
-              className="text-sm text-gray-500 italic mt-6"
+              className="text-xs md:text-sm text-gray-500 italic mt-4 md:mt-6"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 1.2 }}

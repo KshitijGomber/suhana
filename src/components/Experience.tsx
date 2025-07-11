@@ -48,26 +48,15 @@ const Experience = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 gradient-text">Professional Experience</h2>
-          <div className="w-20 md:w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 gradient-text">Professional Experience</h2>
         </motion.div>
         
         <div className="relative">
-          {/* Animated Timeline Line - Responsive positioning */}
-          <motion.div
-            className="absolute left-6 md:left-1/2 lg:left-[25%] transform md:-translate-x-1/2 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 z-10"
-            initial={{ height: 0 }}
-            whileInView={{ height: "calc(100% - 4rem)" }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-            viewport={{ once: true, margin: "-100px" }}
-            style={{ top: "2rem" }}
-          />
-          
           <div className="space-y-12 md:space-y-16">
             {experiences.map((exp, index) => (
               <motion.div 
