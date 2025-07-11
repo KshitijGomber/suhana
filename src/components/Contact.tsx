@@ -1,17 +1,46 @@
 import React from 'react';
+import emailjs from '@emailjs/browser';
 import { Mail, Phone, Linkedin, MapPin, Download, Send } from 'lucide-react';
 
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitStatus, setSubmitStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const subject = formData.get('subject');
-    const message = formData.get('message');
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
     
-    const mailtoLink = `mailto:suhana0627@gmail.com?subject=${encodeURIComponent(subject as string)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-    window.location.href = mailtoLink;
+    // EmailJS configuration from environment variables
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    
+    // Check if environment variables are loaded
+    if (!serviceId || !templateId || !publicKey) {
+      console.error('EmailJS configuration missing:', { serviceId, templateId, publicKey });
+      setSubmitStatus('error');
+      setIsSubmitting(false);
+      return;
+    }
+    
+    emailjs.sendForm(serviceId, templateId, e.currentTarget, publicKey)
+      .then((result) => {
+        console.log('Email sent successfully:', result.text);
+        setSubmitStatus('success');
+        setIsSubmitting(false);
+        // Reset form
+        (e.target as HTMLFormElement).reset();
+        // Reset success message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      })
+      .catch((error) => {
+        console.error('Email sending failed:', error);
+        setSubmitStatus('error');
+        setIsSubmitting(false);
+        // Reset error message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      });
   };
 
   const contactInfo = [
@@ -84,11 +113,11 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="contact-form">
             <h3 className="text-2xl font-bold mb-6 text-gray-800">Send a Message</h3>
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handleSubmit} noValidate>
               <div className="form-group">
                 <input
                   type="text"
-                  name="name"
+                  name="from_name"
                   placeholder="Your Name"
                   className="form-input"
                   required
@@ -97,7 +126,7 @@ const Contact = () => {
               <div className="form-group">
                 <input
                   type="email"
-                  name="email"
+                  name="from_email"
                   placeholder="Your Email"
                   className="form-input"
                   required
@@ -117,13 +146,39 @@ const Contact = () => {
                   name="message"
                   placeholder="Your Message"
                   className="form-textarea"
+                  rows={5}
                   required
                 ></textarea>
               </div>
-              <button type="submit" className="submit-btn">
-                <Send className="w-5 h-5 mr-2" />
-                Send Message
+              <button 
+                type="submit" 
+                className={`submit-btn ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5 mr-2" />
+                    Send Message
+                  </>
+                )}
               </button>
+              
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="mt-4 p-4 bg-green-100 border border-green-300 rounded-lg text-green-700 text-center">
+                  ✅ Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              {submitStatus === 'error' && (
+                <div className="mt-4 p-4 bg-red-100 border border-red-300 rounded-lg text-red-700 text-center">
+                  ❌ Failed to send message. Please try again or contact me directly.
+                </div>
+              )}
             </form>
           </div>
           

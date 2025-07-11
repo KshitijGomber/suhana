@@ -101,10 +101,52 @@ To update personal information:
 
 ## 📧 Contact Form
 
-The contact form is configured to open the user's default email client with:
-- **Recipient**: suhana0627@gmail.com
-- **Pre-filled Subject**: From the form input
-- **Pre-filled Body**: Includes name, email, and message
+The contact form uses EmailJS to send emails directly without opening the user's email client.
+
+### EmailJS Setup (Required for Contact Form)
+
+1. **Create EmailJS Account**
+   - Go to [EmailJS.com](https://www.emailjs.com/)
+   - Sign up for a free account
+
+2. **Create Email Service**
+   - Add a new email service (Gmail, Outlook, etc.)
+   - Connect your email account
+   - Note the Service ID
+
+3. **Create Email Template**
+   - Create a new email template
+   - Use these template variables:
+     - `{{from_name}}` - Sender's name
+     - `{{from_email}}` - Sender's email
+     - `{{subject}}` - Email subject
+     - `{{message}}` - Email message
+   - Set recipient email to: suhana0627@gmail.com
+   - Note the Template ID
+
+4. **Get Public Key**
+   - Go to Account settings
+   - Copy your Public Key
+
+5. **Update Configuration**
+   - Open `src/components/Contact.tsx`
+   - Replace the following values:
+     ```javascript
+     const serviceId = 'your_service_id';
+     const templateId = 'your_template_id';
+     const publicKey = 'your_public_key';
+     ```
+
+### Template Example
+```
+Subject: New Portfolio Contact: {{subject}}
+
+From: {{from_name}} ({{from_email}})
+Subject: {{subject}}
+
+Message:
+{{message}}
+```
 
 ## 🌐 Deployment
 
@@ -153,15 +195,22 @@ The build files will be generated in the `dist/` folder.
    npm run dev
    ```
 
-2. **Dependencies not installing**
+2. **Dependencies not installing or Rollup native module errors**
    ```bash
-   # Clear npm cache and reinstall
+   # Clear npm cache and reinstall (fixes Apple Silicon Mac issues)
    npm cache clean --force
    rm -rf node_modules package-lock.json
    npm install
    ```
 
-3. **Build errors**
+3. **EmailJS environment variables not working**
+   ```bash
+   # Make sure environment variables start with VITE_
+   # Restart development server after creating/updating .env file
+   npm run dev
+   ```
+
+4. **Build errors**
    ```bash
    # Check for TypeScript errors
    npm run lint
