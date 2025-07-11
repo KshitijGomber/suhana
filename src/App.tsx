@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import LoadingScreen from './components/LoadingScreen';
 import './App.css';
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +62,7 @@ function App() {
         <Gallery />
       </main>
       <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
