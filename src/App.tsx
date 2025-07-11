@@ -13,9 +13,13 @@ import LoadingScreen from './components/LoadingScreen';
 import './App.css';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { useLenis } from './hooks/useLenis';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+
+  // Initialize Lenis smooth scroll
+  useLenis();
 
   const handleLoadingFinish = () => {
     setIsLoading(false);

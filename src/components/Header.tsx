@@ -59,24 +59,22 @@ const Header = () => {
       // Close mobile menu first if open
       setIsMenuOpen(false);
       
-      // Use requestAnimationFrame to ensure the scroll happens after any layout changes
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          // Get the actual header height dynamically
-          const header = document.querySelector('header');
-          const headerHeight = header ? header.offsetHeight : 80;
-          
-          // Account for section padding - sections have py-20 (80px top padding)
-          // So we reduce the additional offset since sections already have padding
-          const additionalOffset = 10;
-          const targetPosition = targetElement.offsetTop - headerHeight - additionalOffset;
-          
-          window.scrollTo({
-            top: Math.max(0, targetPosition), // Ensure we don't scroll to negative values
-            behavior: 'smooth'
-          });
-        }, 100); // Small delay to ensure menu closes first
-      });
+      // Use Lenis scroll to target element
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.offsetHeight : 80;
+      const additionalOffset = 10;
+      const targetPosition = targetElement.offsetTop - headerHeight - additionalOffset;
+      
+      // Use Lenis scrollTo if available, otherwise fallback to regular scroll
+      const lenis = (window as any).lenis;
+      if (lenis) {
+        lenis.scrollTo(Math.max(0, targetPosition));
+      } else {
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: 'smooth'
+        });
+      }
     } else {
       // Close mobile menu if element not found
       setIsMenuOpen(false);
