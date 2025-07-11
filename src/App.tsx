@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -18,18 +19,31 @@ function App() {
     setIsLoading(false);
   };
 
+  // Scroll progress bar logic
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-pink-100 to-rose-100 text-gray-800">
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 z-50 origin-left"
+        style={{ scaleX }}
+      />
       <LoadingScreen isVisible={isLoading} onFinish={handleLoadingFinish} />
       
       {/* Floating GIF - Always visible on main site */}
       {!isLoading && (
         <div className="fixed bottom-2 right-2 z-40 w-24 h-24 md:w-32 md:h-32">
           <img 
-            src="/cat-gif.gif" 
+            src="https://www.animatedimages.org/data/media/1250/animated-hello-kitty-image-0066.gif" 
             alt="Cute waving cat" 
             className="w-full h-full object-contain hover:scale-110 transition-transform duration-300 bg-transparent"
-            style={{ backgroundColor: 'transparent' }}
+            style={{ backgroundColor: '' }}
           />
         </div>
       )}

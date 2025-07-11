@@ -10,7 +10,7 @@ const Gallery = () => {
       icon: <Users className="w-5 h-5" />
     },
     {
-      image: 'https://images.pexels.com/photos/6994982/pexels-photo-6994982.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: '/volunteer.jpeg',
       title: 'Community Outreach',
       category: 'Volunteer Work',
       icon: <Heart className="w-5 h-5" />

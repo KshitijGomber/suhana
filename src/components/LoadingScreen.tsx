@@ -28,7 +28,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible, onFinish }) =>
           {/* Typing Animation */}
           <div className="text-3xl md:text-5xl font-bold font-mono mb-8">
             <TypingLine text="Hi," delay={300} />
-            <TypingLine text="I am Suhana" delay={1200} />
+            <TypingLine text="I am Suhana" delay={1000} />
           </div>
 
           {/* Loading Dots */}
