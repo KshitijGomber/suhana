@@ -85,10 +85,10 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-      isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'
+      isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-white/70 backdrop-blur-sm'
     }`}>
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="text-2xl font-bold text-gray-800">
+      <div className="container mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
+        <div className="text-lg md:text-2xl font-bold text-gray-800 truncate">
           Suhana Gomber
         </div>
         
@@ -118,7 +118,8 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 rounded-lg hover:bg-purple-100 transition-colors text-gray-800"
+          className="md:hidden p-3 rounded-lg hover:bg-purple-100 transition-colors text-gray-800 min-w-[48px] min-h-[48px] flex items-center justify-center"
+          aria-label="Toggle mobile menu"
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -126,8 +127,8 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <nav className="md:hidden bg-white/90 backdrop-blur-md border-t border-gray-200">
-          <div className="container mx-auto px-6 py-4 space-y-4">
+        <nav className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-lg">
+          <div className="container mx-auto px-4 md:px-6 py-4 space-y-2">
             {menuItems.map((item) => {
               const sectionId = item.href.slice(1); // Remove '#' from href
               const isActive = activeSection === sectionId;
@@ -137,10 +138,10 @@ const Header = () => {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`block transition-colors duration-200 font-medium cursor-pointer ${
+                  className={`block transition-colors duration-200 font-medium cursor-pointer py-3 px-4 rounded-lg min-h-[48px] flex items-center ${
                     isActive 
-                      ? 'text-purple-600 font-semibold' 
-                      : 'text-gray-600 hover:text-purple-600'
+                      ? 'text-purple-600 font-semibold bg-purple-50' 
+                      : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50/50 active:bg-purple-100'
                   }`}
                 >
                   {item.label}

@@ -5,6 +5,57 @@
 /* Smooth scrolling for the entire page */
 html {
   scroll-behavior: smooth;
+  /* Prevent bounce scroll on iOS */
+  overflow-x: hidden;
+}
+
+/* Mobile-specific improvements */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Prevent horizontal scroll on mobile */
+body {
+  overflow-x: hidden;
+  /* Improve scroll performance on mobile */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Fix viewport issues on mobile browsers */
+  html {
+    height: -webkit-fill-available;
+  }
+  
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Prevent zoom on input focus on iOS */
+  input, textarea, select {
+    font-size: 16px;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Custom styles for the portfolio */
@@ -21,4 +72,15 @@ html {
 
 .hover-scale:hover {
   transform: scale(1.05);
+}
+
+/* Mobile-safe hover effects */
+@media (hover: none) and (pointer: coarse) {
+  .hover-scale:hover {
+    transform: none;
+  }
+  
+  .hover-scale:active {
+    transform: scale(0.95);
+  }
 }

@@ -42,8 +42,8 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-pink-100 to-rose-100"></div>
       
       {/* Main Content Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center min-h-screen py-20 md:py-24">
           
           {/* Left Side - Image */}
           <motion.div 
@@ -54,7 +54,7 @@ const Hero = () => {
           >
             <motion.div
               className="relative"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <motion.div
@@ -72,7 +72,7 @@ const Hero = () => {
               <img
                 src="/headshot.jpg"
                 alt="Suhana Gomber"
-                className="relative w-80 h-96 lg:w-96 lg:h-[480px] object-cover rounded-2xl shadow-2xl border-4 border-white/50"
+                className="relative w-48 h-60 sm:w-56 sm:h-70 md:w-80 md:h-96 lg:w-96 lg:h-[480px] object-cover rounded-2xl shadow-2xl border-4 border-white/50"
               />
               <motion.div
                 className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
@@ -104,13 +104,13 @@ const Hero = () => {
 
           {/* Right Side - Content */}
           <motion.div 
-            className="text-center lg:text-left order-2 lg:order-2"
+            className="text-center lg:text-left order-2 lg:order-2 px-4 md:px-0"
             initial={{ opacity: 0, x: 100 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
             <motion.h1 
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+              className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -119,7 +119,7 @@ const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-xl md:text-2xl text-gray-600 mb-4"
+              className="text-lg md:text-xl lg:text-2xl text-gray-600 mb-3 md:mb-4"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 1 }}
@@ -137,7 +137,7 @@ const Hero = () => {
             </motion.p>
             
             <motion.div 
-              className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center sm:items-stretch"
+              className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start items-stretch"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: 1.4 }}
@@ -148,9 +148,9 @@ const Hero = () => {
                   e.preventDefault();
                   handleNavClick('contact');
                 }}
-                className="group relative bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-lg font-semibold px-10 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center min-w-[180px] overflow-hidden cursor-pointer"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                className="group relative bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-base md:text-lg font-semibold px-6 md:px-10 py-3 md:py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center min-w-[160px] md:min-w-[180px] min-h-[48px] overflow-hidden cursor-pointer active:scale-95"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <span className="relative z-10">Get In Touch</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -162,9 +162,9 @@ const Hero = () => {
                   e.preventDefault();
                   handleNavClick('about');
                 }}
-                className="group relative border-2 border-purple-500 text-purple-600 hover:text-white text-lg font-semibold px-10 py-4 rounded-full transition-all duration-300 hover:shadow-lg flex items-center justify-center min-w-[180px] overflow-hidden cursor-pointer"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                className="group relative border-2 border-purple-500 text-purple-600 hover:text-white text-base md:text-lg font-semibold px-6 md:px-10 py-3 md:py-4 rounded-full transition-all duration-300 hover:shadow-lg flex items-center justify-center min-w-[160px] md:min-w-[180px] min-h-[48px] overflow-hidden cursor-pointer active:scale-95"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <span className="relative z-10">Learn More</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -177,7 +177,7 @@ const Hero = () => {
                   link.download = 'Suhana_Gomber_Resume.pdf';
                   link.click();
                 }}
-                className="group relative bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white text-lg font-semibold px-10 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 min-w-[200px] overflow-hidden"
+                className="group relative bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white text-base md:text-lg font-semibold px-6 md:px-10 py-3 md:py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 md:gap-3 min-w-[180px] md:min-w-[200px] min-h-[48px] overflow-hidden active:scale-95"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >

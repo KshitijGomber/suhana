@@ -38,11 +38,11 @@ function App() {
       
       {/* Floating GIF - Always visible on main site */}
       {!isLoading && (
-        <div className="fixed bottom-2 right-2 z-40 w-24 h-24 md:w-32 md:h-32">
+        <div className="fixed bottom-4 right-4 z-30 w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32">
           <img 
             src="https://www.animatedimages.org/data/media/1250/animated-hello-kitty-image-0066.gif" 
             alt="Cute waving cat" 
-            className="w-full h-full object-contain hover:scale-110 transition-transform duration-300 bg-transparent"
+            className="w-full h-full object-contain hover:scale-110 transition-transform duration-300 bg-transparent pointer-events-none"
             style={{ backgroundColor: '' }}
           />
         </div>
