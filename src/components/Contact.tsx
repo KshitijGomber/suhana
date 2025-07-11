@@ -162,8 +162,8 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <h3 className="text-base md:text-lg lg:text-xl font-bold mb-4 md:mb-6 text-gray-800">Send a Message</h3>
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4" onSubmit={handleSubmit} noValidate>
-              <div className="form-group col-span-1">
+            <form className="grid grid-cols-1 gap-3 md:gap-4" onSubmit={handleSubmit} noValidate>
+              <div className="form-group">
                 <input
                   type="text"
                   name="from_name"
@@ -172,7 +172,7 @@ const Contact = () => {
                   required
                 />
               </div>
-              <div className="form-group col-span-1">
+              <div className="form-group">
                 <input
                   type="email"
                   name="from_email"
@@ -181,7 +181,7 @@ const Contact = () => {
                   required
                 />
               </div>
-              <div className="form-group col-span-2">
+              <div className="form-group">
                 <input
                   type="text"
                   name="subject"
@@ -190,7 +190,7 @@ const Contact = () => {
                   required
                 />
               </div>
-              <div className="form-group col-span-2">
+              <div className="form-group">
                 <textarea
                   name="message"
                   placeholder="Your Message"
@@ -199,7 +199,7 @@ const Contact = () => {
                   required
                 ></textarea>
               </div>
-              <div className="col-span-2">
+              <div>
                 <button 
                   type="submit" 
                   className={`w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-sm md:text-base font-semibold px-4 md:px-6 py-3 rounded-full transition-all duration-300 shadow-lg flex items-center justify-center gap-2 active:scale-95 min-h-[44px] ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
@@ -220,12 +220,12 @@ const Contact = () => {
               </div>
               {/* Status Messages */}
               {submitStatus === 'success' && (
-                <div className="col-span-2 mt-2 p-3 bg-green-100 border border-green-300 rounded-lg text-green-700 text-center text-xs md:text-sm">
+                <div className="mt-2 p-3 bg-green-100 border border-green-300 rounded-lg text-green-700 text-center text-xs md:text-sm">
                   ✅ Message sent successfully! I'll get back to you soon.
                 </div>
               )}
               {submitStatus === 'error' && (
-                <div className="col-span-2 mt-2 p-3 bg-red-100 border border-red-300 rounded-lg text-red-700 text-center text-xs md:text-sm">
+                <div className="mt-2 p-3 bg-red-100 border border-red-300 rounded-lg text-red-700 text-center text-xs md:text-sm">
                   ❌ Failed to send message. Please try again or contact me directly.
                 </div>
               )}
