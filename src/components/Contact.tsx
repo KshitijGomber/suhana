@@ -207,10 +207,14 @@ const Contact = () => {
             </div>
             
             <div className="mt-8 pt-6 border-t border-gray-200">
-              <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-scale flex items-center justify-center space-x-2 shadow-lg">
+              <a
+                href="/resume.pdf"
+                download="Suhana_Gomber_Resume.pdf"
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover-scale flex items-center justify-center space-x-2 shadow-lg text-center"
+              >
                 <Download className="w-5 h-5" />
                 <span>Download Resume</span>
-              </button>
+              </a>
             </div>
           </div>
         </div>
