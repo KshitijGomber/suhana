@@ -5,8 +5,12 @@ import { useInView } from 'framer-motion';
 
 const Gallery = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.2 });
+  const isInView = useInView(ref, { once: false, amount: 0.1 }); // Reduced threshold for mobile
   const [selectedCategory, setSelectedCategory] = React.useState('All');
+  const [imageLoadErrors, setImageLoadErrors] = React.useState(new Set());
+  
+  // Check if device is mobile
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   const categories = ['All', 'Academic', 'Volunteer Work', 'Photography'];
 
@@ -110,6 +114,14 @@ const Gallery = () => {
     ? galleryItems 
     : galleryItems.filter(item => item.category === selectedCategory);
 
+  // Debug logging
+  React.useEffect(() => {
+    console.log('Gallery component mounted');
+    console.log('isInView:', isInView);
+    console.log('filteredItems count:', filteredItems.length);
+    console.log('isMobile:', isMobile);
+  }, [isInView, filteredItems.length, isMobile]);
+
   return (
     <motion.section 
       id="gallery"
@@ -147,25 +159,32 @@ const Gallery = () => {
           </div>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
           {filteredItems.map((item, index) => (
             <motion.div 
               key={index} 
               className={`group relative overflow-hidden rounded-2xl hover-scale ${
-                item.featured ? 'md:col-span-2 lg:col-span-2' : ''
+                item.featured ? 'col-span-2 md:col-span-2 lg:col-span-2' : ''
               }`}
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+              initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 20 }}
+              animate={isInView ? (isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }) : (isMobile ? { opacity: 0 } : { opacity: 0, y: 20 })}
+              transition={{ duration: isMobile ? 0.3 : 0.4, delay: isMobile ? 0 : 0.1 + index * 0.05 }}
             >
-              <div className={`overflow-hidden ${
+              <div className={`overflow-hidden bg-gray-100 ${
                 item.featured ? 'aspect-[4/3]' : 'aspect-square'
               }`}>
                 <img
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  width="400"
+                  height="400"
+                  onError={(e) => {
+                    console.log('Failed to load image:', item.image);
+                    setImageLoadErrors(prev => new Set(prev).add(item.image));
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 md:group-hover:scale-110"
                 />
               </div>
               
