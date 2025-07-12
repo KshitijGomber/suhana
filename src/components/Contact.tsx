@@ -123,7 +123,7 @@ const Contact = () => {
             >
               <h3 className="text-base md:text-lg lg:text-xl font-bold mb-3 md:mb-4 text-gray-800">Professional Summary</h3>
               <p className="text-gray-600 mb-3 md:mb-4 leading-relaxed text-xs md:text-sm">
-                MBA candidate with 3+ years of experience in talent acquisition and business development. 
+                MBA candidate with 3+ years of experience in human resources and talent acquisition. 
                 Proven track record of building high-performing teams, exceeding KPIs, and driving organizational growth. 
                 Passionate about leveraging digital transformation to create innovative business solutions.
               </p>

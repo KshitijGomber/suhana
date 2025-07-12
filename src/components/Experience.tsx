@@ -9,29 +9,28 @@ const Experience = () => {
 
   const experiences = [
     {
-      title: 'Associate Consultant | Talent Acquisition',
+      title: 'Associate Consultant – Talent Acquisition',
       company: 'Capgemini',
       location: 'Bangalore, India',
-      period: '2021 – 2024',
+      period: '2021–2024',
       icon: <Briefcase className="w-6 h-6" />,
       highlights: [
-        'Led high-volume talent pipelines for up to 10 roles daily across IT domains',
-        'Screened 200+ resumes per day and conducted interviews for a French multinational',
-        'Managed and mentored a team of 2 interns with hands-on guidance',
-        'Onboarded 250+ employees, including a peak of 82 in a single month',
-        'Secured 20% of hires through referrals and consistently exceeded KPIs'
+        'Led high-volume IT hiring, screening 200+ resumes daily and managing end-to-end recruitment.',
+        'Managed 2 interns and trained new hires on sourcing tools and ATS systems.',
+        'Onboarded 350+ employees, ensuring smooth transitions and documentation.',
+        'Achieved 20% hires via referrals and optimized sourcing through data insights.',
+        'Aligned hiring with delivery goals to avoid staffing gaps.'
       ]
     },
     {
       title: 'Business Development Intern',
       company: 'Business Fundamental Consulting',
       location: 'Bangalore, India',
-      period: '2019 – 2020',
+      period: '2019–2020',
       icon: <TrendingUp className="w-6 h-6" />,
       highlights: [
-        'Managed full business development cycle across 5 industries',
-        'Generated leads and supported tailored pitch efforts for HR solutions',
-        'Leveraged LinkedIn and social media to expand reach',
+        'Generated leads and supported pitches across 5 industries.',
+        'Leveraged LinkedIn and social media to expand reach.',
         'Contributed to a 20% increase in candidate engagement within 3 months'
       ]
     }

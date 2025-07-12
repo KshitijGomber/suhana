@@ -60,7 +60,7 @@ function App() {
         <About />
         <Experience />
         <Education />
-        <Coursework />
+        {/* <Coursework /> */}
         <Extracurricular />
         <Contact />
         <Gallery />

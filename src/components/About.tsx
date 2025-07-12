@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, Heart, Globe, Palette } from 'lucide-react';
+import { User, Heart, Globe, Palette, Brush, Camera } from 'lucide-react';
 import { useInView } from 'framer-motion';
 
 const About = () => {
@@ -10,9 +10,16 @@ const About = () => {
   const hobbies = [
     { icon: <Heart className="w-6 h-6" />, text: 'Mindfulness meditation' },
     { icon: <Globe className="w-6 h-6" />, text: 'Collecting fridge magnets & notebooks' },
-    { icon: <Palette className="w-6 h-6" />, text: 'Classical dancer & Amateur Artist' },
-    { icon: <Globe className="w-6 h-6" />, text: 'Travelling & learning languages' }
-  ];
+    { icon: <Palette className="w-6 h-6" />, text: 'Classical dancer' },
+    { 
+      icon: (
+        <div className="flex gap-1 items-center">
+          <Brush className="w-5 h-5" />
+          <Camera className="w-5 h-5" />
+        </div>
+      ),
+      text: 'Amateur artist & photographer' 
+    } ];
 
   return (
     <motion.section 
@@ -54,9 +61,10 @@ const About = () => {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              Currently pursuing my MBA in Digital Business at Queen's University's Smith School of Business, 
-              I bring over 3 years of experience in talent acquisition and business development. My passion lies 
-              in connecting the right people with the right opportunities while driving organizational growth.
+              I’m an MBA candidate at Smith School of Business, Queen’s University, with over 3 years of global experience 
+              in HR and talent acquisition. At Capgemini, I led high-volume hiring for IT roles, managed teams, 
+              streamlined recruitment operations, and onboarded hundreds of employees, all while aligning talent 
+              strategies with evolving business needs.
             </motion.p>
             
             <motion.p 
@@ -65,9 +73,20 @@ const About = () => {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              With a strong foundation in international business and specialized expertise in digital transformation, 
-              I'm excited to leverage technology and data-driven insights to create innovative business solutions. 
-              My goal is to bridge the gap between human potential and business success.
+              With a  foundation in global business and a growing focus on digital innovation, 
+              I’m equipped to design people-first solutions that are both strategic and scalable.
+              I’m passionate about building high-performing teams, elevating the candidate experience, 
+              and using data to drive smarter, more impactful hiring decisions.
+            </motion.p>
+
+            <motion.p 
+              className="text-sm md:text-lg text-gray-600 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              Beyond the workplace, I believe in the power of community impact, whether through volunteerism, 
+              mentorship, or creating more inclusive hiring practices that open doors for underrepresented talent.
             </motion.p>
           </motion.div>
           

@@ -6,14 +6,60 @@ import { useInView } from 'framer-motion';
 const Gallery = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
+  const [selectedCategory, setSelectedCategory] = React.useState('All');
+
+  const categories = ['All', 'Academic', 'Volunteer Work', 'Photography'];
 
   const galleryItems = [
+    // Featured/Hero Images - Academic & Volunteer Highlights
     {
-      image: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=600',
-      title: 'Team Collaboration',
-      category: 'Professional',
-      icon: <Users className="w-5 h-5" />
+      image: '/g/g1.JPG',
+      title: 'Class Group Photo',
+      category: 'Academic',
+      icon: <Award className="w-5 h-5" />,
+      featured: true
     },
+    {
+      image: '/g/g5.jpeg',
+      title: 'Volunteer Service',
+      category: 'Volunteer Work',
+      icon: <Heart className="w-5 h-5" />,
+      featured: true
+    },
+    
+    // Photography Portfolio
+    {
+      image: '/g/g2.jpeg',
+      title: 'Sunset Photography',
+      category: 'Photography',
+      icon: <Camera className="w-5 h-5" />
+    },
+    {
+      image: '/g/g3.jpeg',
+      title: 'Nature Photography',
+      category: 'Photography',
+      icon: <Camera className="w-5 h-5" />
+    },
+    {
+      image: '/g/g6.jpeg',
+      title: 'Tree Photography',
+      category: 'Photography',
+      icon: <Camera className="w-5 h-5" />
+    },
+    {
+      image: '/g/g11.jpeg',
+      title: 'University Architecture',
+      category: 'Photography',
+      icon: <Camera className="w-5 h-5" />
+    },
+    {
+      image: '/g/g14.jpeg',
+      title: 'Pet Photography',
+      category: 'Photography',
+      icon: <Camera className="w-5 h-5" />
+    },
+    
+    // Volunteer Work & Community
     {
       image: '/volunteer.jpeg',
       title: 'Community Outreach',
@@ -21,30 +67,48 @@ const Gallery = () => {
       icon: <Heart className="w-5 h-5" />
     },
     {
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600',
-      title: 'Leadership Workshop',
-      category: 'Professional Development',
-      icon: <Award className="w-5 h-5" />
-    },
-    {
-      image: 'https://images.pexels.com/photos/5427673/pexels-photo-5427673.jpeg?auto=compress&cs=tinysrgb&w=600',
-      title: 'Group Discussion',
-      category: 'Team Building',
-      icon: <Users className="w-5 h-5" />
-    },
-    {
-      image: 'https://images.pexels.com/photos/7688465/pexels-photo-7688465.jpeg?auto=compress&cs=tinysrgb&w=600',
-      title: 'Educational Session',
-      category: 'Teaching',
+      image: '/g/g4.jpeg',
+      title: 'Volunteer Initiative',
+      category: 'Volunteer Work',
       icon: <Heart className="w-5 h-5" />
     },
     {
-      image: 'https://images.pexels.com/photos/7688281/pexels-photo-7688281.jpeg?auto=compress&cs=tinysrgb&w=600',
-      title: 'Conference Presentation',
-      category: 'Speaking',
-      icon: <Award className="w-5 h-5" />
+      image: '/g/g9.PNG',
+      title: 'Community Service',
+      category: 'Volunteer Work',
+      icon: <Heart className="w-5 h-5" />
+    },
+    
+    // Academic & Team Projects
+    {
+      image: '/g/g12.jpeg',
+      title: 'Project Collaboration',
+      category: 'Academic',
+      icon: <Users className="w-5 h-5" />
+    },
+    {
+      image: '/g/g7.jpeg',
+      title: 'Group Study Session',
+      category: 'Academic',
+      icon: <Users className="w-5 h-5" />
+    },
+    {
+      image: '/g/g10.jpeg',
+      title: 'Team Group Photo',
+      category: 'Academic',
+      icon: <Users className="w-5 h-5" />
+    },
+    {
+      image: '/g/g8.jpeg',
+      title: 'Friends & Teamwork',
+      category: 'Academic',
+      icon: <Users className="w-5 h-5" />
     }
   ];
+
+  const filteredItems = selectedCategory === 'All' 
+    ? galleryItems 
+    : galleryItems.filter(item => item.category === selectedCategory);
 
   return (
     <motion.section 
@@ -63,19 +127,40 @@ const Gallery = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 gradient-text">Gallery</h2>
-          <div className="w-20 md:w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          <div className="w-20 md:w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-8"></div>
+          
+          {/* Category Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  selectedCategory === category
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                    : 'bg-white/70 text-purple-700 hover:bg-purple-100 hover:text-purple-800'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </motion.div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
-          {galleryItems.map((item, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          {filteredItems.map((item, index) => (
             <motion.div 
               key={index} 
-              className="group relative overflow-hidden rounded-2xl hover-scale"
+              className={`group relative overflow-hidden rounded-2xl hover-scale ${
+                item.featured ? 'md:col-span-2 lg:col-span-2' : ''
+              }`}
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
             >
-              <div className="aspect-square overflow-hidden">
+              <div className={`overflow-hidden ${
+                item.featured ? 'aspect-[4/3]' : 'aspect-square'
+              }`}>
                 <img
                   src={item.image}
                   alt={item.title}
@@ -84,12 +169,12 @@ const Gallery = () => {
               </div>
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
                   <div className="flex items-center space-x-2 mb-2">
                     <div className="text-purple-400">{item.icon}</div>
-                    <span className="text-purple-300 text-sm font-semibold">{item.category}</span>
+                    <span className="text-purple-300 text-xs md:text-sm font-semibold">{item.category}</span>
                   </div>
-                  <h3 className="text-white text-lg font-bold">{item.title}</h3>
+                  <h3 className="text-white text-sm md:text-lg font-bold">{item.title}</h3>
                 </div>
               </div>
             </motion.div>

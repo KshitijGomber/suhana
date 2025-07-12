@@ -44,7 +44,7 @@ const Header = () => {
     { href: '#about', label: 'About' },
     { href: '#experience', label: 'Experience' },
     { href: '#education', label: 'Education' },
-    { href: '#coursework', label: 'Coursework' },
+    // { href: '#coursework', label: 'Coursework' },
     { href: '#extracurricular', label: 'Community Impact' },
     { href: '#contact', label: 'Contact' },
     { href: '#gallery', label: 'Gallery' }
@@ -86,9 +86,16 @@ const Header = () => {
       isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-white/70 backdrop-blur-sm'
     }`}>
       <div className="container mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
-        <div className="text-lg md:text-2xl font-bold text-gray-800 truncate">
-          Suhana Gomber
-        </div>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="text-lg md:text-2xl font-bold truncate cursor-pointer hover:opacity-80 transition-opacity duration-200"
+        >
+          <span className="text-gray-800">Suhana</span> <span className="gradient-text">Gomber</span>
+        </a>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">

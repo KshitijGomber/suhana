@@ -72,7 +72,7 @@ const Hero = () => {
               <img
                 src="/headshot.jpg"
                 alt="Suhana Gomber"
-                className="relative w-48 h-60 sm:w-56 sm:h-70 md:w-80 md:h-96 lg:w-96 lg:h-[480px] object-cover rounded-2xl shadow-2xl border-4 border-white/50"
+                className="relative w-40 h-52 sm:w-48 sm:h-60 md:w-64 md:h-80 lg:w-80 lg:h-96 object-cover rounded-2xl shadow-2xl border-4 border-white/50"
               />
               <motion.div
                 className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
@@ -124,7 +124,7 @@ const Hero = () => {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 1 }}
             >
-              MBA Candidate | Talent Acquisition Expert | Business Development Professional
+              MBA Candidate | Human Capital | People & Strategy | Talent Acquisition | Recruitment 
             </motion.p>
             
             <motion.p 
@@ -133,7 +133,7 @@ const Hero = () => {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 1.2 }}
             >
-              Passionate about connecting talent with opportunities and driving business growth through strategic thinking and innovative solutions.
+              Connecting talent with opportunity backed by strategy, speed and a passion for people.
             </motion.p>
             
             {/* <motion.div 
